@@ -183,7 +183,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-24 22:17:01 / 修改时间：22:20:44" itemprop="dateCreated datePublished" datetime="2021-08-24T22:17:01+08:00">2021-08-24</time>
+              <time title="创建时间：2021-08-24 22:17:01 / 修改时间：22:25:46" itemprop="dateCreated datePublished" datetime="2021-08-24T22:17:01+08:00">2021-08-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,7 +206,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="蓝桥杯第12届c-A组——括号序列"><a href="#蓝桥杯第12届c-A组——括号序列" class="headerlink" title="蓝桥杯第12届c++A组——括号序列"></a>蓝桥杯第12届c++A组——括号序列</h1><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3423/">题目链接</a></p>
+          <p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3423/">题目链接</a></p>
 <p>题目大意， 匹配括号。</p>
           <!--noindex-->
             <div class="post-button">
@@ -259,7 +259,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-24 21:47:54 / 修改时间：22:01:18" itemprop="dateCreated datePublished" datetime="2021-08-24T21:47:54+08:00">2021-08-24</time>
+              <time title="创建时间：2021-08-24 21:47:54 / 修改时间：22:25:40" itemprop="dateCreated datePublished" datetime="2021-08-24T21:47:54+08:00">2021-08-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,15 +282,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="欧拉筛"><a href="#欧拉筛" class="headerlink" title="欧拉筛"></a>欧拉筛</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/24/%E6%AC%A7%E6%8B%89%E7%AD%9B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> cnt, prime[<span class="number">1003</span>];</span><br><span class="line"><span class="keyword">bool</span> is_prime[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Ols</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++) is_prime[i] = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(is_prime[i]) prime[++ cnt] = i;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= cnt; j ++)</span><br><span class="line">        &#123;</span><br><span class="line">            is_prime[i * prime[j]] = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(i % prime[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Ols</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; i ++) <span class="built_in">printf</span>(<span class="string">&quot;%d%c&quot;</span>, prime[i], <span class="string">&quot; \n&quot;</span>[i == n]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="第20行为什么要break"><a href="#第20行为什么要break" class="headerlink" title="==第20行为什么要break=="></a>==第20行为什么要break==</h2><p>欧拉筛保证为线性的关键就在于这个break， 在欧拉筛中， 每个合数只会被弃==最小的质因子==筛一次， 如果当前的i是prime[j]的倍数关系， 那么当j变为j加1时， i*prime[j+1]就相当于是用prime[j+1]筛出， 但是显然这个数应该被prime[j]筛， 不满足了要求， 也就不再是线性。</p>
+<blockquote>
+<p>举个例子</p>
+<p>当前i=4， prime[j]为2，用2*4更新8后， 如果不break， 那么就会用下一个质数3继续更新， 即用3*4更新了12， 此时这个12是用3更新的， 但实际上12的最小质因子是2， 所以12应该被2*6更新一次， 导致12被3更新的就是4是2的倍数， 所以一定要break。</p>
+</blockquote>
+
       
     </div>
 
@@ -309,7 +310,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2021/08/24/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2021/08/24/Acwing372.%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -323,7 +324,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/08/24/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/" class="post-title-link" itemprop="url">二分图匹配</a>
+            <a href="/2021/08/24/Acwing372.%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/" class="post-title-link" itemprop="url">二分图匹配</a>
         </h2>
 
         <div class="post-meta">
@@ -334,7 +335,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-24 21:12:14 / 修改时间：22:01:03" itemprop="dateCreated datePublished" datetime="2021-08-24T21:12:14+08:00">2021-08-24</time>
+              <time title="创建时间：2021-08-24 21:12:14 / 修改时间：22:25:29" itemprop="dateCreated datePublished" datetime="2021-08-24T21:12:14+08:00">2021-08-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -357,10 +358,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Acwing372-棋盘覆盖-二分图匹配"><a href="#Acwing372-棋盘覆盖-二分图匹配" class="headerlink" title="Acwing372.棋盘覆盖(二分图匹配)"></a>Acwing372.棋盘覆盖(二分图匹配)</h1><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/374/">题目链接</a></h2><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>在一张n*n的网格图上， 有一些网格禁止触及， 求这张图上能放置的1*2的棋子的最大数量(棋子间不允许有重叠部分)</p>
+          <h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/374/">题目链接</a></h2><h2 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h2><p>在一张n*n的网格图上， 有一些网格禁止触及， 求这张图上能放置的1*2的棋子的最大数量(棋子间不允许有重叠部分)</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/08/24/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/#more" rel="contents">
+              <a class="btn" href="/2021/08/24/Acwing372.%E6%A3%8B%E7%9B%98%E8%A6%86%E7%9B%96/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -529,7 +530,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
