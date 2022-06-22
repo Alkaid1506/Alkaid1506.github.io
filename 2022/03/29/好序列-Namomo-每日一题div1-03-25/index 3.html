@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alkaid1506.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="题目链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="好序列 Namomo 每日一题div1 03-25">
+<meta property="og:url" content="http://alkaid1506.github.io/2022/03/29/%E5%A5%BD%E5%BA%8F%E5%88%97-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-25/index.html">
+<meta property="og:site_name" content="Alkaid&#39;s Blog">
+<meta property="og:description" content="题目链接">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-29T08:41:41.000Z">
+<meta property="article:modified_time" content="2022-03-29T12:50:37.688Z">
+<meta property="article:author" content="Zsh">
+<meta property="article:tag" content="每日一题">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="线段树">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://alkaid1506.github.io/2022/03/29/%E5%A5%BD%E5%BA%8F%E5%88%97-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-25/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>好序列 Namomo 每日一题div1 03-25 | Alkaid's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Alkaid's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习路上的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2022/03/29/%E5%A5%BD%E5%BA%8F%E5%88%97-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Zsh">
+      <meta itemprop="description" content="一个学子的学习博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alkaid's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          好序列 Namomo 每日一题div1 03-25
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-29 16:41:41 / 修改时间：20:50:37" itemprop="dateCreated datePublished" datetime="2022-03-29T16:41:41+08:00">2022-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Acm/" itemprop="url" rel="index"><span itemprop="name">Acm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="http://oj.daimayuan.top/course/10/problem/613">题目链接</a></p>
+<span id="more"></span>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给出一个长度为$n$的序列$A_1, A_2, …, A_n$， 定义一个序列$\{A\}$是好的， 当且仅当他的每一个子区间$[l, r]$满足至少存在一个$x$只出现了一次</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$T$组数据， $1 \leq T \leq 10^4$</p>
+<p>$1 \leq n \leq 2 \times 10^5, \sum n \leq 10^6, 1 \leq A_i \leq 10^9$</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><p>我们找到所有这样的区间： $[l, r], A_l = A_r$</p>
+<p>然后我们尝试确认这个区间是不是合法的， 如果是合法的， 那必然有一个$i$， 使得</p>
+<script type="math/tex; mode=display">l < i < r, Pre_i < l, Next_i > r</script><p>其中$Pre_i$为$A_i$上一次出现的位置， $Next_i$为$A_i$下一次出现的位置</p>
+<p>然后不会实现， 故放弃</p>
+<h3 id="正解"><a href="#正解" class="headerlink" title="正解"></a>正解</h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>既然只要存在一个区间$[l, r]$不符合条件就能判定答案， 那我们就尝试找出一个不符合条件的区间</p>
+<p>具体的， 我们枚举$l$， 这里显然有$r &gt; l$， 考虑我们的右端点的范围， <strong>这部分是解决这个问题的核心</strong></p>
+<p>显然对于$i &gt; l$的每一个$A_i$， $A_{l, r}$序列要么不包含$A_i$, 要么包含$A_i$至少两次， 假设$A_{l, n}$包含一个数$x$， $fst[x], scd[x]$分别是其第一次， 第二次出现的位置</p>
+<p>那么应该有$r &lt; fst[x] \ or \ r &gt;= scd[x]$， 对于每一个$x$， 我们将它对应的$r$的范围取一个交集， 如果有一个$i &gt; l$被每个$x$对应的范围覆盖了， 那么这就是我们要找的$r$</p>
+<p>区间交集可以用<strong>线段树</strong>来实现， 其他东西都好处理</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> root 1, n, 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson l, mid, rt &lt;&lt; 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson mid + 1, r, rt &lt;&lt; 1 | 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> t;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">200005</span>], b[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">200005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> x)</span> <span class="comment">// 离散化</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std:: <span class="built_in">lower_bound</span>(b + <span class="number">1</span>, b + m + <span class="number">1</span>, x) - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SegmentTree</span> // 线段树</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    std:: vector&lt;<span class="keyword">int</span>&gt; mx, c;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">SegmentTree</span>(): <span class="built_in">mx</span>(<span class="number">4</span> * n + <span class="number">1</span>, <span class="number">0</span>), <span class="built_in">c</span>(<span class="number">4</span> * n + <span class="number">1</span>, <span class="number">0</span>) &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span><span class="params">(<span class="keyword">int</span> rt)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mx[rt] = std:: <span class="built_in">max</span>(mx[rt &lt;&lt; <span class="number">1</span>], mx[rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Color</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        mx[rt] += v;</span><br><span class="line"></span><br><span class="line">        c[rt] += v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PushDown</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(c[rt])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">Color</span>(lson, c[rt]);</span><br><span class="line">            <span class="built_in">Color</span>(rson, c[rt]);</span><br><span class="line"></span><br><span class="line">            c[rt] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l &gt;= ql &amp;&amp; r &lt;= qr)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">Color</span>(l, r, rt, v);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">PushDown</span>(l, r, rt);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(ql &lt;= mid) <span class="built_in">Modify</span>(lson, ql, qr, v);</span><br><span class="line">        <span class="keyword">if</span>(qr &gt; mid) <span class="built_in">Modify</span>(rson, ql, qr, v);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">Update</span>(rt);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> rt, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l &gt;= ql &amp;&amp; r &lt;= qr) <span class="keyword">return</span> mx[rt];</span><br><span class="line"></span><br><span class="line">        <span class="built_in">PushDown</span>(l, r, rt);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(qr &lt;= mid)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Query</span>(lson, ql, qr);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ql &gt; mid)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Query</span>(rson, ql, qr);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> std:: <span class="built_in">max</span>(<span class="built_in">Query</span>(lson, ql, qr), <span class="built_in">Query</span>(rson, ql, qr));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t --)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]), b[i] = a[i];</span><br><span class="line">				<span class="comment">// 到99行都是离散化</span></span><br><span class="line">        std:: <span class="built_in">sort</span>(b + <span class="number">1</span>, b + n + <span class="number">1</span>);</span><br><span class="line">        m = std:: <span class="built_in">unique</span>(b + <span class="number">1</span>, b + n + <span class="number">1</span>) - b - <span class="number">1</span>；</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) p[i] = <span class="built_in">Find</span>(a[i]);</span><br><span class="line">      </span><br><span class="line">        std:: <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">fst</span><span class="params">(m + <span class="number">1</span>, <span class="number">0</span>)</span>, <span class="title">scd</span><span class="params">(m + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        SegmentTree st;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> tps = <span class="number">0</span>; <span class="comment">// 表示出现了几种数， 对应我们查找的位置要被多少个集合包含</span></span><br><span class="line">        <span class="keyword">bool</span> judge = <span class="literal">true</span>;</span><br><span class="line">				<span class="comment">// 枚举左端点并更新</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i --)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(fst[p[i]])</span><br><span class="line">            &#123;</span><br><span class="line">                st.<span class="built_in">Modify</span>(root, <span class="number">1</span>, fst[p[i]] - <span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(scd[p[i]]) st.<span class="built_in">Modify</span>(root, scd[p[i]], n, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">                scd[p[i]] = fst[p[i]];</span><br><span class="line">                st.<span class="built_in">Modify</span>(root, scd[p[i]], n, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">                fst[p[i]] = i;</span><br><span class="line">                <span class="keyword">if</span>(fst[p[i]] - <span class="number">1</span>) st.<span class="built_in">Modify</span>(root, <span class="number">1</span>, fst[p[i]] - <span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 防止越界</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(st.<span class="built_in">Query</span>(root, i + <span class="number">1</span>, n) == tps)</span><br><span class="line">                &#123;</span><br><span class="line">                    judge = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">              	<span class="comment">// a[l]如果第一次出现， 肯定不会是我们要找的区间的左端点， 因为a[l]只出现了一次</span></span><br><span class="line">                tps ++;</span><br><span class="line"></span><br><span class="line">                fst[p[i]] = i;</span><br><span class="line">                <span class="keyword">if</span>(fst[p[i]] - <span class="number">1</span>) st.<span class="built_in">Modify</span>(root, <span class="number">1</span>, fst[p[i]] - <span class="number">1</span>, <span class="number">1</span>); <span class="comment">// 防止越界</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(judge)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;non-boring\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;boring\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体实现的话</p>
+<p>对于集合求交， 我们使用线段树， 对于一个集合包含的范围$[l, r]$， 我们将线段树上的这段区间$+1$， 这样我们就知道了每个位置被多少个集合所包含</p>
+<p>前面提到了， 我们需要找到一个位置被每个集合所包含， 那么我们只需要关心最大值就好了， 如果被包含次数最多的位置都没有被所有集合包含， 就说明一定找不到， 所以这里使用线段树维护区间最大值</p>
+<p>因为对于每个$l$我们要向右找$r$，$l - 1$的查找范围包含$l$的， 可以由$l$的范围很容易的转移过来， 所以$l$倒序枚举要好一些， 枚举的时候维护一下$fst, scd$并用线段树增删一些对应集合就可以了</p>
+<p>另外由于$A_i$很大， 我们使用离散化， 用$p$数组代表</p>
+<h1 id="浅谈线段树"><a href="#浅谈线段树" class="headerlink" title="浅谈线段树"></a>浅谈线段树</h1><p>线段树是一个很巧妙的数据结构， 能够在$O(log)$的时间复杂度内解决区间的修改和查询问题(虽然常数很大)</p>
+<p>个人理解线段树是基于二分的数据结构， 通过将区间一分为二分成$log$层， 使查询的量级仅为$O(log)$， 这也导致了线段树至少要开<strong>四倍空间</strong></p>
+<p>而众所周知线段树的区间修改并不是直接进行修改， 而是通过打标记进行延迟修改</p>
+<p>但是不管是区间修改还是单点修改， 线段树有一个原则</p>
+<blockquote>
+<p>一但某个节点维护的信息被改变了， 必须通过回溯中<code>Update()</code>更新它的父节点， 从而更新他的所有祖先节点</p>
+</blockquote>
+<p>这个原则保证了每次查询的时候只要当前节点代表的区间范围完全位于查询区间的范围内， 就可以直接返回该节点维护的信息了， 因为子孙节点的更改必然已经更新了本节点， 我将这称为<strong>自下而上的更新</strong>， 区间修改和单点修改都存在自下而上的更新</p>
+<p>而区间修改的线段树引入了<strong>自上而下的更新</strong>， 通过打标记来实现</p>
+<p>线段树中一个节点被<strong>打标记</strong>的含义为： 此节点的值已经被改变， 但是他的儿子并没有被改变。 为什么不设计成他的儿子也被改变？ 个人理解是儿子也改变的话需要特判最后一层的叶子结点</p>
+<p>打标记让我们可以在查询的时候通过将标记下放， 进行自上而下更新， 最终返回正确的节点信息， 也就是说，<strong>查询的时候必须要下放标记</strong></p>
+<p>那么为什么更新的时候也要下放标记呢？</p>
+<p>原因就是之前说过的， 线段树要遵从自下而上更新的原则， 所以修改的时候一定要<code>Update()</code>， 但是如果我们没有下放标记， 会出现下面这种情况：</p>
+<blockquote>
+<p>当前有一个节点$rt$带有标记， 并且他的所有祖先都没有标记， 也就是说$rt$的信息是完全正确的</p>
+<p>这个时候， 我们要修改$rt &lt;&lt; 1$， 也就是$rt$的左儿子节点区间的值， 但是我们在修改的时候没有下放标记</p>
+<p>这个时候来一个询问， 问$rt &lt;&lt; 1$的信息， 是完全可以返回正确的结果的， 因为查询的时候下放了标记</p>
+<p>但是如果这个时候来的询问不是问$rt &lt;&lt; 1$， 而是$rt$的信息， 就会得到错误的结果</p>
+<p>原因很简单， 我们修改完$rt &lt;&lt; 1$信息的时候， $rt &lt;&lt; 1$的信息并不是正确的， 因为我们修改的时候没有把$rt$的信息传给它， 虽然后续查询的时候会给， 但是我们说过线段树必须要有自下而上的更新， 也就是说我们修改完$rt &lt;&lt; 1$的信息之后会用它来更新$rt$的信息， $rt$的信息本来是正确的， 现在就被不正确的$rt &lt;&lt; 1$信息更新了， 这时候我们如果查询$rt$节点， 就会得到错误的信息</p>
+<p>所以修改的时候一定要下放标记！！！ 保证每个节点都被正确的子节点更新</p>
+</blockquote>
+<p>以上纯属个人理解， 博客也是写给自己看的， 不喜勿喷</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="tag"># 每日一题</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag"># 线段树</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/28/%E5%8C%BA%E9%97%B4%E5%92%8C-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-27/" rel="prev" title="区间和 Namomo 每日一题div1 03-27">
+      <i class="fa fa-chevron-left"></i> 区间和 Namomo 每日一题div1 03-27
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/30/namonamo-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-30/" rel="next" title="namonamo Namomo 每日一题div1 03-30">
+      namonamo Namomo 每日一题div1 03-30 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="nav-number">1.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%951"><span class="nav-number">1.3.1.</span> <span class="nav-text">解法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E8%A7%A3"><span class="nav-number">1.3.2.</span> <span class="nav-text">正解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">浅谈线段树</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zsh"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Zsh</p>
+  <div class="site-description" itemprop="description">一个学子的学习博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021034008号-1 </a>
+      <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwdh6zx8ij300k00k0mz.jpg" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37132402371417" rel="noopener" target="_blank">鲁公安网备37132402371417号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zsh</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
