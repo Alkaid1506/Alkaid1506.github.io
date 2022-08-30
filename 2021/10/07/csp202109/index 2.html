@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alkaid1506.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="csp认证2021年九月部分题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="csp202109">
+<meta property="og:url" content="http://alkaid1506.github.io/2021/10/07/csp202109/index.html">
+<meta property="og:site_name" content="Alkaid&#39;s Blog">
+<meta property="og:description" content="csp认证2021年九月部分题解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-07T02:39:14.000Z">
+<meta property="article:modified_time" content="2022-04-03T10:14:08.027Z">
+<meta property="article:author" content="Zsh">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://alkaid1506.github.io/2021/10/07/csp202109/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>csp202109 | Alkaid's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Alkaid's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习路上的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2021/10/07/csp202109/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Zsh">
+      <meta itemprop="description" content="一个学子的学习博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alkaid's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          csp202109
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-07 10:39:14" itemprop="dateCreated datePublished" datetime="2021-10-07T10:39:14+08:00">2021-10-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-03 18:14:08" itemprop="dateModified" datetime="2022-04-03T18:14:08+08:00">2022-04-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Acm/" itemprop="url" rel="index"><span itemprop="name">Acm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="csp认证2021年九月部分题解"><a href="#csp认证2021年九月部分题解" class="headerlink" title="csp认证2021年九月部分题解"></a>csp认证2021年九月部分题解</h1><span id="more"></span>
+<h2 id="202109-1-数组推导"><a href="#202109-1-数组推导" class="headerlink" title="202109-1.数组推导"></a><a target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T129">202109-1.数组推导</a></h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>设有一长度为$n$的数组$A$， 给出数组$B$表示数组$A$的前缀最大值， 即</p>
+<script type="math/tex; mode=display">B_i = max \{A_1, A_2, ... A_i\}</script><p>设$sum$表示$\sum_{i = 1}^n A_i$， 求$sum$可能的最大值和最小值</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>$n \leq 100, 0 \leq B_i \leq 10^5$</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>分两种情况来考虑</p>
+<ol>
+<li><p>$B_i &gt; B_{i - 1}$</p>
+<p>此时的$A_i$必须等于$B_i$， $sum$的最大最小值都要加$B_i$</p>
+</li>
+<li><p>$B_i = B_{i - 1}$</p>
+<p>此时的$A_i$可以是0到$B_i$之间的任何一个整数， $sum$最小时$A_i = 0$, $sum$最大时$A_i = B_i$</p>
+</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">102</span>];</span><br><span class="line"><span class="keyword">int</span> mxs, mns; <span class="comment">// mxs表示sum最大值， mns表示sum最小值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;b[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        mxs += b[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(b[i] &gt; b[i - <span class="number">1</span>]) mns += b[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n%d\n&quot;</span>, mxs, mns);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="202109-2-非零段划分"><a href="#202109-2-非零段划分" class="headerlink" title="202109-2.非零段划分"></a><a target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T130">202109-2.非零段划分</a></h2><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>给出一个长度为$n$的非负整数序列$A$， 你可以选择一个$p$， 让所有的$A_i &lt; p$变成零， 求如何选取$p$使得得到的非零段数量最多， 最后只要输出答案的数量即可， 不要求给出$p$</p>
+<h3 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h3><p>$70\%$数据满足$n \leq 1000$</p>
+<p>$100\%$数据满足$n \leq 5 \times 10^5, 0 \leq A_i \leq 10^4$</p>
+<h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><h4 id="70分做法"><a href="#70分做法" class="headerlink" title="70分做法"></a>70分做法</h4><p>暴力的枚举$p$, 求答案， 时间复杂度$O(n \times p)$</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">500005</span>];</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> p = <span class="number">0</span>; p &lt;= <span class="number">10000</span>; p ++) <span class="comment">// 枚举p</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">            <span class="keyword">if</span>(a[i] &gt;= p &amp;&amp; a[i - <span class="number">1</span>] &lt; p) <span class="comment">// 新的一段</span></span><br><span class="line">                res ++;</span><br><span class="line"></span><br><span class="line">        ans = std:: <span class="built_in">max</span>(ans, res); <span class="comment">// 更新答案</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="100分做法"><a href="#100分做法" class="headerlink" title="100分做法"></a>100分做法</h4><p>题意转化为大于等于$p$的连续子段的数量的最大值， 那么我们很容易可以想到其中的递推关系， $p$的答案可以由$p + 1$转移而来， 即在$p + 1$状态的基础上将所有的$A_i = p$添加进状态里</p>
+<p>利用并查集思想， 我们倒序枚举$p$， 每次将所有的$A_i = p$加入到并查集中， 分三种情况</p>
+<blockquote>
+<ol>
+<li><p>$A_{i + 1}, A_{i - 1}$都不在并查集中</p>
+<p>此时$A_i$新开辟了一个段落， $ans ++$</p>
+</li>
+<li><p>$A_{i + 1}, A_{i - 1}$都在并查集中</p>
+<p>此时$A_i$连接了两个并查集， 并查集数量$- 1$， $ans —$</p>
+</li>
+<li><p>$A_{i + 1}, A_{i - 1}$中有且仅有一个在并查集中</p>
+<p>并查集数量不变， 大小改变， $ans$不变</p>
+</li>
+</ol>
+</blockquote>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">500005</span>];</span><br><span class="line"><span class="keyword">bool</span> in[<span class="number">500005</span>]; <span class="comment">// 判断a[i]是否在并查集内</span></span><br><span class="line"><span class="keyword">int</span> ans, res;</span><br><span class="line">std:: vector&lt;<span class="keyword">int</span>&gt; pos[<span class="number">10004</span>]; <span class="comment">// 存放a[i] = p的所有i， 方便找位置</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[i]);</span><br><span class="line"></span><br><span class="line">        pos[a[i]].<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">10000</span>; i &gt;= <span class="number">1</span>; i --) <span class="comment">// 枚举p</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; pos[i].<span class="built_in">size</span>(); j ++) <span class="comment">// 找到a[i]</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p = pos[i][j];</span><br><span class="line">						<span class="comment">// 更新res</span></span><br><span class="line">            <span class="keyword">if</span>(!in[p - <span class="number">1</span>] &amp;&amp; !in[p + <span class="number">1</span>]) res ++;</span><br><span class="line">            <span class="keyword">if</span>(in[p - <span class="number">1</span>] &amp;&amp; in[p + <span class="number">1</span>]) res --;</span><br><span class="line">						<span class="comment">// 加入并查集</span></span><br><span class="line">            in[p] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ans = std:: <span class="built_in">max</span>(ans, res); <span class="comment">// 更新答案</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="202109-4-收集卡牌"><a href="#202109-4-收集卡牌" class="headerlink" title="202109-4.收集卡牌"></a><a target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T132">202109-4.收集卡牌</a></h2><h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h3><p>抽卡游戏， 有$n$种卡牌， 每次抽卡， 获得第$i$张卡牌的概率为$p_i$， 如果你抽到一张已抽到过的卡牌， 这张卡牌会转换为一枚硬币， 你可以用$k$枚硬币换一张你没有获得过的卡牌</p>
+<p>$PS:$你会把硬币攒在手里， 等能够通过兑换获得所有卡牌时， 一次性兑换并停止抽卡</p>
+<p>求获得所有$n$种卡牌的期望抽卡次数</p>
+<h3 id="数据范围-2"><a href="#数据范围-2" class="headerlink" title="数据范围"></a>数据范围</h3><p>$20\%$数据， $1 \leq n, k \leq 5$</p>
+<p>另外$20\%$数据， 所有$p_i$均相等</p>
+<p>$100\%$数据， $1 \leq n \leq 16, 1 \leq k \leq 5, p_i \geq \frac{1}{10000}, \sum_{i = 1}^n p_i = 1$</p>
+<h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>这显然是一道期望$dp$题， 那么我们的$dp$数组表示的肯定是概率， 再看一眼数据范围， 极有可能是状压$dp$</p>
+<p>考虑状态的设计</p>
+<ol>
+<li><p>既然是抽卡次数的期望， 那么把次数加进状态里</p>
+</li>
+<li><p>状态压缩， 鉴于状态用0和1来表示， 只能表示每种卡是否获得过</p>
+</li>
+</ol>
+<p>这个题目中还有另外一个设定， 那就是可以用$k$枚硬币换一张卡牌， 那我们还需要手中的硬币数量这个参数， 但是仔细一想， 我们知道了当前抽卡的次数， 也知道了当前哪些卡被抽到过（即已抽到了多少种卡）， 这两个一减不就是手中的硬币数量吗？</p>
+<blockquote>
+<p>举个例子， 你当前抽了$i$次卡， 抽到的卡状态为$j$, 假设$j$中已抽到的卡用1来表示， 并且$j$中含有$cnt[j]$个1</p>
+<p>那么我们手中的硬币数量就一定是$i - cnt[j]$</p>
+</blockquote>
+<p>那么我们就可以很容易的设计出$dp$状态了， 设$dp[i][j]$为当前抽了$i$张卡， 抽到的卡组成的状态为$j$的概率</p>
+<p>具体转移看代码</p>
+<p>另外据说ccf的评测机， 没有spj， 要输出小数点后10位才可以， 而且本题精度要求较高， 需要使用long double</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> p[<span class="number">21</span>];</span><br><span class="line"><span class="keyword">int</span> cnt[<span class="number">1</span> &lt;&lt; <span class="number">17</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> dp[<span class="number">102</span>][<span class="number">1</span> &lt;&lt; <span class="number">17</span>]; <span class="comment">// dp状态</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> ans; 答案</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++) <span class="built_in">scanf</span>(<span class="string">&quot;%Lf&quot;</span>, &amp;p[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> m = n * k, s = <span class="number">1</span> &lt;&lt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s; i ++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j ++)</span><br><span class="line">            cnt[i] += ((i &gt;&gt; j) &amp; <span class="number">1</span>); <span class="comment">// 预处理出每一个状态中1的个数</span></span><br><span class="line"></span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1.00000000</span>; <span class="comment">// dp数组初始化</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++) <span class="comment">// 枚举次数</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s; j ++) <span class="comment">// 枚举状态</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; n; l ++) <span class="comment">// 枚举本次抽到的卡</span></span><br><span class="line">                <span class="keyword">if</span>((j &gt;&gt; l) &amp; <span class="number">1</span>) <span class="comment">// 如果状态中本次抽到的卡为0， 那么显然无法转移</span></span><br><span class="line">                    dp[i][j] += (dp[i - <span class="number">1</span>][j] + dp[i - <span class="number">1</span>][j - (<span class="number">1</span> &lt;&lt; l)]) * p[l]; <span class="comment">// 两种转移路径， i - 1次中抽到或没抽到过第l张卡</span></span><br><span class="line">						</span><br><span class="line">            <span class="keyword">if</span>(cnt[j] + (i - cnt[j]) / k == n) <span class="comment">// 抽卡可以立即结束</span></span><br><span class="line">                ans += dp[i][j] * (<span class="keyword">long</span> <span class="keyword">double</span>)i, dp[i][j] = <span class="number">0</span>; <span class="comment">// 统计答案， 抽卡结束的标志即为dp[i][j] = 0， 无法向其他状态转移， 不写这句会出错</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.10Lf\n&quot;</span>, ans); <span class="comment">// 控制输出为小数点后10位</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$dp$可以写成记忆化搜索的形式， 所以这题也可以写搜索</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dp/" rel="tag"># dp</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/06/csp202104/" rel="prev" title="csp202104">
+      <i class="fa fa-chevron-left"></i> csp202104
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/11/%E6%95%B0%E8%AE%BA%E5%AE%9A%E7%90%86/" rel="next" title="数论定理">
+      数论定理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#csp%E8%AE%A4%E8%AF%812021%E5%B9%B4%E4%B9%9D%E6%9C%88%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">csp认证2021年九月部分题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#202109-1-%E6%95%B0%E7%BB%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.1.</span> <span class="nav-text">202109-1.数组推导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.1.3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202109-2-%E9%9D%9E%E9%9B%B6%E6%AE%B5%E5%88%92%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">202109-2.非零段划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#70%E5%88%86%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">70分做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#100%E5%88%86%E5%81%9A%E6%B3%95"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">100分做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202109-4-%E6%94%B6%E9%9B%86%E5%8D%A1%E7%89%8C"><span class="nav-number">1.3.</span> <span class="nav-text">202109-4.收集卡牌</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-3"><span class="nav-number">1.3.4.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zsh"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Zsh</p>
+  <div class="site-description" itemprop="description">一个学子的学习博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021034008号-1 </a>
+      <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwdh6zx8ij300k00k0mz.jpg" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37132402371417" rel="noopener" target="_blank">鲁公安网备37132402371417号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zsh</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

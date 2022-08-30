@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alkaid1506.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="MySql 语法笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql语法笔记">
+<meta property="og:url" content="http://alkaid1506.github.io/2022/03/26/MySql%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Alkaid&#39;s Blog">
+<meta property="og:description" content="MySql 语法笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-26T14:58:51.000Z">
+<meta property="article:modified_time" content="2022-03-27T11:14:59.392Z">
+<meta property="article:author" content="Zsh">
+<meta property="article:tag" content="笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://alkaid1506.github.io/2022/03/26/MySql%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySql语法笔记 | Alkaid's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Alkaid's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习路上的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2022/03/26/MySql%E8%AF%AD%E6%B3%95%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Zsh">
+      <meta itemprop="description" content="一个学子的学习博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alkaid's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySql语法笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-26 22:58:51" itemprop="dateCreated datePublished" datetime="2022-03-26T22:58:51+08:00">2022-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-27 19:14:59" itemprop="dateModified" datetime="2022-03-27T19:14:59+08:00">2022-03-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySql/" itemprop="url" rel="index"><span itemprop="name">MySql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>MySql 语法笔记</p>
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1UE41147KC?p=1">视频链接</a></p>
+<h2 id="选择语句"><a href="#选择语句" class="headerlink" title="选择语句"></a>选择语句</h2><h3 id="Use语句"><a href="#Use语句" class="headerlink" title="Use语句"></a>Use语句</h3><p>用于选择数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Use [数据库名]</span><br></pre></td></tr></table></figure>
+<h3 id="Select语句"><a href="#Select语句" class="headerlink" title="Select语句"></a>Select语句</h3><p>用于选择某个表中的某些列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Select [列名1, 列名2, ...]</span><br><span class="line">From [表名]</span><br></pre></td></tr></table></figure>
+<p>如果要选择目标表中的所有列， 使用<code>Select *</code></p>
+<p>可以对查询后的数值显示进行更改(这里假设此列类型为数值)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select [列名 * 10 + 1]</span><br></pre></td></tr></table></figure>
+<p>还可以在查询后的显示中将列重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select [列名 As 显示的名字]</span><br></pre></td></tr></table></figure>
+<h3 id="Where语句"><a href="#Where语句" class="headerlink" title="Where语句"></a>Where语句</h3><p>用于选择表中的某些行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Where [条件]</span><br></pre></td></tr></table></figure>
+<p>可以结合<code>Select</code>语句使用， 从满足条件的行中提取列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From []</span><br><span class="line">Where []</span><br></pre></td></tr></table></figure>
+<h3 id="And-Or-Not运算符"><a href="#And-Or-Not运算符" class="headerlink" title="And, Or, Not运算符"></a>And, Or, Not运算符</h3><p>记不清优先级就加括号</p>
+<p><strong>当要查询哪些行中的制定列是或不是<code>Null</code>时， 使用<code>is (Not) Null</code>而不是<code>= Null</code></strong></p>
+<h3 id="In运算符"><a href="#In运算符" class="headerlink" title="In运算符"></a>In运算符</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">列名1 = 1 Or 列名1 = 2 Or 列名1 = 3 Or ...</span><br></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">列名1 In [1, 2, ...]</span><br></pre></td></tr></table></figure>
+<h3 id="Regexp运算符"><a href="#Regexp运算符" class="headerlink" title="Regexp运算符"></a>Regexp运算符</h3><p>正则表达式</p>
+<h3 id="Order-By子句"><a href="#Order-By子句" class="headerlink" title="Order By子句"></a>Order By子句</h3><p>常用于<code>Select</code>语句后， 将查询得到的行按某种顺序排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From []</span><br><span class="line">Where []</span><br><span class="line">Order By [指定键值]</span><br></pre></td></tr></table></figure>
+<h3 id="Limit语句"><a href="#Limit语句" class="headerlink" title="Limit语句"></a>Limit语句</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Limit [偏移量， 指定量]</span><br></pre></td></tr></table></figure>
+<p>跳过前偏移量的行并选择剩下的前制定量的行</p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><h3 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h3><p>合并两张表的信息， 如果是多表连接， 就紧接着再写一个<code>Join [] On[]</code>就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1]</span><br><span class="line">Join [表2]</span><br><span class="line">	On [条件]</span><br></pre></td></tr></table></figure>
+<h3 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h3><p>一个表和自己合并， 起两个别名就可以了</p>
+<h3 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h3><p>假设我们有两张表， 一张表的信息是哪些学生选了那些课， 另一张表是每个课程的详细信息， 现在我们要查询每个学生选的课以及课程的详细信息， 那么我们需要把两张表连接， 但是有的学生并没有选课， 那么使用内连接的话这些学生就不会被显示， 这时候就要使用外连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1]</span><br><span class="line">[Left / Right] Join [表2]</span><br><span class="line">	On [条件]</span><br></pre></td></tr></table></figure>
+<p>如果是<code>Left Join</code>那么就表示表1的条件可以为空值， <code>Right Join</code>则表示表2的条件可以为空值， 同样可以多表连接， 建议使用<code>Left Join</code></p>
+<h3 id="隐式连接"><a href="#隐式连接" class="headerlink" title="隐式连接"></a>隐式连接</h3><p>可以得到两张表(或多张表)的笛卡尔积</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1， 表2， ...]</span><br></pre></td></tr></table></figure>
+<h3 id="Using字句"><a href="#Using字句" class="headerlink" title="Using字句"></a>Using字句</h3><p>当两张表存在相同的列名字并且条件为这两列的值相等时可以用， 也可以指定多列值相同</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1]</span><br><span class="line">Join [表2]</span><br><span class="line">	Using ([列名1， 列名2， ...])</span><br></pre></td></tr></table></figure>
+<h3 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1]</span><br><span class="line">Natural Join [表2]</span><br></pre></td></tr></table></figure>
+<p>当两张表中有且仅有一列的名字相同时课根据此列进行连接</p>
+<h3 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h3><p>笛卡尔积的另一种写法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From [表1]</span><br><span class="line">Cross Join [表2]</span><br></pre></td></tr></table></figure>
+<h3 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h3><p>将多行放在一起显示， 这些行的列数必须相同， 在两个<code>Select</code>语句中间加入<code>Union</code>即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From []</span><br><span class="line">Union</span><br><span class="line">Select []</span><br><span class="line">From []</span><br></pre></td></tr></table></figure>
+<h2 id="插入，-删除，-更新数据"><a href="#插入，-删除，-更新数据" class="headerlink" title="插入， 删除， 更新数据"></a>插入， 删除， 更新数据</h2><h3 id="插入单行"><a href="#插入单行" class="headerlink" title="插入单行"></a>插入单行</h3><p>每一列都插入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Insert Into [表名]</span><br><span class="line">Values (列1数据， 列2数据， ...)</span><br></pre></td></tr></table></figure>
+<p>只插入指定列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Insert Into [表名] (列名1， 列名2， ...)</span><br><span class="line">Values (列名1数据， 列名2数据， ...)</span><br></pre></td></tr></table></figure>
+<h3 id="插入多行"><a href="#插入多行" class="headerlink" title="插入多行"></a>插入多行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Insert Into [表名] (列名1， 列名2， ...)</span><br><span class="line">Values (列名1数据， 列名2数据， ...),</span><br><span class="line">Values (列名1数据， 列名2数据， ...),</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h3 id="插入分层行"><a href="#插入分层行" class="headerlink" title="插入分层行"></a>插入分层行</h3><p>使用内置函数<code>Last_Insert_id</code></p>
+<h3 id="创建表复制"><a href="#创建表复制" class="headerlink" title="创建表复制"></a>创建表复制</h3><p>将已存在的表的某些行或列复制到一张新表里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Create Table [新表名] As</span><br><span class="line">Secect []</span><br><span class="line">From [已存在的表名]</span><br><span class="line">Where []</span><br></pre></td></tr></table></figure>
+<h3 id="更新单行"><a href="#更新单行" class="headerlink" title="更新单行"></a>更新单行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Update [表名]</span><br><span class="line">Set [赋值语句1， 赋值语句2， ...]</span><br><span class="line">Where []</span><br></pre></td></tr></table></figure>
+<p>这里的<code>Where</code>语句用来选定我们要更改的那一行</p>
+<p>也可以将<code>Where</code>语句改为<code>Select</code>语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Update [表名]</span><br><span class="line">Set [赋值语句1， 赋值语句2， ...]</span><br><span class="line">(Select [])</span><br></pre></td></tr></table></figure>
+<h3 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Delete From [表名]</span><br><span class="line">[Where 或 Select语句]</span><br></pre></td></tr></table></figure>
+<h2 id="汇总数据"><a href="#汇总数据" class="headerlink" title="汇总数据"></a>汇总数据</h2><h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Max([列名]);</span><br><span class="line">Min();</span><br><span class="line">Avg();</span><br><span class="line">Sum();</span><br><span class="line">Count();</span><br></pre></td></tr></table></figure>
+<p>其中<code>Count()</code>默认不计算键值为<code>Null</code>的列， 想要算上空值的话写<code>Count(*)</code>， 并且重复键值会被重复计算， 想要不重复就要使用<code>Distinct</code>关键字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Count(Distinct [列名])</span><br></pre></td></tr></table></figure>
+<h3 id="Group-By字句"><a href="#Group-By字句" class="headerlink" title="Group By字句"></a>Group By字句</h3><p>将查询的数据按指定的某一列或多列键值分组， </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From []</span><br><span class="line">Where []</span><br><span class="line">Group By [列名1， 列名2， ...]</span><br><span class="line">Order By []</span><br></pre></td></tr></table></figure>
+<h3 id="Having字句"><a href="#Having字句" class="headerlink" title="Having字句"></a>Having字句</h3><p>对分组后的数据进行筛选</p>
+<p>筛选方法如<code>Where</code>一致， 但是条件中只能出现<code>Select</code>选中的列(聚合函数可以无视这个条件)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Select []</span><br><span class="line">From []</span><br><span class="line">Where []</span><br><span class="line">Group By [列名1， 列名2， ...]</span><br><span class="line">Having []</span><br><span class="line">Order By []</span><br></pre></td></tr></table></figure>
+<h3 id="Rollup运算符"><a href="#Rollup运算符" class="headerlink" title="Rollup运算符"></a>Rollup运算符</h3><p>用<code>With</code>跟在<code>Group By</code>之后， 用于汇总聚合函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Group By [] With Rollup</span><br></pre></td></tr></table></figure>
+<h2 id="编写复杂查询"><a href="#编写复杂查询" class="headerlink" title="编写复杂查询"></a>编写复杂查询</h2><h3 id="All关键字"><a href="#All关键字" class="headerlink" title="All关键字"></a>All关键字</h3><p>用于子查询前， 表示所有子查询</p>
+<h3 id="Any关键字"><a href="#Any关键字" class="headerlink" title="Any关键字"></a>Any关键字</h3><p>用于子查询前， 表示任意一个子查询</p>
+<h3 id="Exists运算符"><a href="#Exists运算符" class="headerlink" title="Exists运算符"></a>Exists运算符</h3><p>不好解释</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/24/Educational-Codeforces-Round-125/" rel="prev" title="Educational Codeforces Round 125">
+      <i class="fa fa-chevron-left"></i> Educational Codeforces Round 125
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/28/%E5%8C%BA%E9%97%B4%E5%92%8C-Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-03-27/" rel="next" title="区间和 Namomo 每日一题div1 03-27">
+      区间和 Namomo 每日一题div1 03-27 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.</span> <span class="nav-text">选择语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.1.</span> <span class="nav-text">Use语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Select%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">Select语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Where%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.</span> <span class="nav-text">Where语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#And-Or-Not%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">And, Or, Not运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">In运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regexp%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.6.</span> <span class="nav-text">Regexp运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Order-By%E5%AD%90%E5%8F%A5"><span class="nav-number">1.7.</span> <span class="nav-text">Order By子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.8.</span> <span class="nav-text">Limit语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">内连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.3.</span> <span class="nav-text">外连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.4.</span> <span class="nav-text">隐式连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Using%E5%AD%97%E5%8F%A5"><span class="nav-number">2.5.</span> <span class="nav-text">Using字句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.6.</span> <span class="nav-text">自然连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.7.</span> <span class="nav-text">交叉连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88"><span class="nav-number">2.8.</span> <span class="nav-text">联合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%EF%BC%8C-%E5%88%A0%E9%99%A4%EF%BC%8C-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">插入， 删除， 更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%8D%95%E8%A1%8C"><span class="nav-number">3.1.</span> <span class="nav-text">插入单行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%A4%9A%E8%A1%8C"><span class="nav-number">3.2.</span> <span class="nav-text">插入多行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%88%86%E5%B1%82%E8%A1%8C"><span class="nav-number">3.3.</span> <span class="nav-text">插入分层行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%A4%8D%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">创建表复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%8D%95%E8%A1%8C"><span class="nav-number">3.5.</span> <span class="nav-text">更新单行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A1%8C"><span class="nav-number">3.6.</span> <span class="nav-text">删除行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">汇总数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-By%E5%AD%97%E5%8F%A5"><span class="nav-number">4.2.</span> <span class="nav-text">Group By字句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Having%E5%AD%97%E5%8F%A5"><span class="nav-number">4.3.</span> <span class="nav-text">Having字句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rollup%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.4.</span> <span class="nav-text">Rollup运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E5%A4%8D%E6%9D%82%E6%9F%A5%E8%AF%A2"><span class="nav-number">5.</span> <span class="nav-text">编写复杂查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#All%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">5.1.</span> <span class="nav-text">All关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Any%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">5.2.</span> <span class="nav-text">Any关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exists%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.3.</span> <span class="nav-text">Exists运算符</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zsh"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Zsh</p>
+  <div class="site-description" itemprop="description">一个学子的学习博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021034008号-1 </a>
+      <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwdh6zx8ij300k00k0mz.jpg" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37132402371417" rel="noopener" target="_blank">鲁公安网备37132402371417号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zsh</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
