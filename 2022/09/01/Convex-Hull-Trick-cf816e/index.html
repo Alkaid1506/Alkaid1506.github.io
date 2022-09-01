@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alkaid1506.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="cf816e， Convex Hull Trick算法学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convex Hull Trick cf816e">
+<meta property="og:url" content="http://alkaid1506.github.io/2022/09/01/Convex-Hull-Trick-cf816e/index.html">
+<meta property="og:site_name" content="Alkaid&#39;s Blog">
+<meta property="og:description" content="cf816e， Convex Hull Trick算法学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24egy1h5revh9jq1j20b40ee0sx.jpg">
+<meta property="article:published_time" content="2022-09-01T13:00:36.000Z">
+<meta property="article:modified_time" content="2022-09-01T14:28:56.024Z">
+<meta property="article:author" content="Zsh">
+<meta property="article:tag" content="补题">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="cf">
+<meta property="article:tag" content="斜率优化">
+<meta property="article:tag" content="凸包优化">
+<meta property="article:tag" content="最短路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24egy1h5revh9jq1j20b40ee0sx.jpg">
+
+<link rel="canonical" href="http://alkaid1506.github.io/2022/09/01/Convex-Hull-Trick-cf816e/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Convex Hull Trick cf816e | Alkaid's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Alkaid's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习路上的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2022/09/01/Convex-Hull-Trick-cf816e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Zsh">
+      <meta itemprop="description" content="一个学子的学习博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alkaid's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Convex Hull Trick cf816e
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-01 21:00:36 / 修改时间：22:28:56" itemprop="dateCreated datePublished" datetime="2022-09-01T21:00:36+08:00">2022-09-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Acm/" itemprop="url" rel="index"><span itemprop="name">Acm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1715/problem/E">cf816e</a>， Convex Hull Trick算法学习笔记</p>
+<span id="more"></span>
+<h1 id="Convex-Hull-Trick"><a href="#Convex-Hull-Trick" class="headerlink" title="Convex Hull Trick"></a>Convex Hull Trick</h1><p>以最小值为例， 最大值同理</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>给出$n$个形如$y = k_i x + b_i$的一次函数和$q$个$x$询问每个$x_i$在这$n$个一次函数中能取到的最小\大值， 询问必须离线</p>
+<h2 id="原理及实现"><a href="#原理及实现" class="headerlink" title="原理及实现"></a>原理及实现</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>对于给出的这$n$个函数中的每一个， 我们只保留它当作最小值的那一段， 如图(来自PEGWiki)所示， 共有四个函数， 绿色的部分是我们保留的</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h5revh9jq1j20b40ee0sx.jpg" alt=""></p>
+<p>这样做完之后我们记录了保留的这些函数本身和它们的交点， 询问$x$时只需要二分找到$x$在哪一段里就可以了</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>下面讲讲怎么找出这些有用的最小值段</p>
+<p>不难看出这些线段一定是组成一个凸包， 因为从左到右这些线段的斜率一定是不断减小的， 那我们就首先把这$n$个函数按照斜率从小到大排好序， 然后尝试挨个添加到存好的段里</p>
+<p>假设按斜率从小到大有$l_1, l_2, l_3$三个函数， $Insect(l_i, l_j)$是两条函数的交点， 那么如果$Insect(l_3, l_1) &gt; Insect(l_2, l_1)$， 那么$l_2$的那一段应该被保留， 我们求出$Insect(l_3, l_2)$之后添加这个交点和$l_3$就可以了； 反之如果有$Insect(l_3, l_1) &lt; Insect(l_2, l_1)$，那么$l_2$与$l_1$的那一段就没有意义了， 我们删除$l_2$和$Insect(l_2, l_1)$， 添加$l_3$和$Insect(l_3, l_1)$</p>
+<p>上述操作在类似单调栈的过程中进行， 当栈内元素数量$\geq 2$时， 先不断尝试用要添加的函数去删除栈顶的函数和其对应的交点然后再添加这个函数和对应的交点</p>
+<p>这样做完后的交点一定是从小到大排好序的， 询问时二分找到交点在那个段里就好了</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Line</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> k, b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 要保证添加的函数是按斜率从小到大排好的</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cht</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> ls; <span class="comment">// 栈内的函数(有用段)数量</span></span><br><span class="line">    <span class="keyword">double</span> isct[<span class="number">112345</span>]; <span class="comment">// 交点</span></span><br><span class="line">    Line line[<span class="number">112345</span>]; <span class="comment">// 栈内函数的表达式</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span> <span class="comment">// 初始化</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ls = <span class="number">0</span>;</span><br><span class="line">        line[<span class="number">0</span>] = (Line)&#123;<span class="number">0</span>, <span class="number">0</span>&#125;; <span class="comment">// 这个有没有都行</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">Insect</span><span class="params">(Line a, Line b)</span> <span class="comment">// 求交点</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> k1 = <span class="number">1.0</span> * a.k, b1 = <span class="number">1.0</span> * a.b, k2 = <span class="number">1.0</span> * b.k, b2 = <span class="number">1.0</span> * b.b;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (b2 - b1) / (k1 - k2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(Line x)</span> <span class="comment">// 尝试添加一个新的函数</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(ls &gt;= <span class="number">2</span> &amp;&amp; <span class="built_in">Insect</span>(line[ls - <span class="number">1</span>], x) &lt;= <span class="built_in">Insect</span>(line[ls - <span class="number">1</span>], line[ls])) ls --; <span class="comment">// 不断删除没有用的栈顶函数</span></span><br><span class="line"></span><br><span class="line">        isct[ls] = <span class="built_in">Insect</span>(line[ls], x); <span class="comment">// 记录交点</span></span><br><span class="line">        line[++ ls] = x; <span class="comment">// 记录函数</span></span><br><span class="line">      	<span class="comment">// 这样写的话二分查找到的交点编号和函数编号是一致的</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> qx)</span> <span class="comment">// 询问qx的最小值</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = std:: <span class="built_in">lower_bound</span>(isct + <span class="number">1</span>, isct + ls, qx) - isct;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1LL</span> * line[p].k * qx + line[p].b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; cht;</span><br></pre></td></tr></table></figure>
+<h1 id="E-Long-Way-Home"><a href="#E-Long-Way-Home" class="headerlink" title="E. Long Way Home"></a>E. Long Way Home</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个$n$个点， $m$条边的无向带权图， 另外每两个点之间有一种带权通道， 点$u$到点$v$之间的通道权值为$(u - v)^2$， 另外给出一个$k$， 代表你最多可以走$k$条通道， 问你从$1$号点到每个点的距离最小值是多少</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$2 \leq n \leq 10^5, 1 \leq m \leq 10^5, 1 \leq k \leq 20$</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="Hint1"><a href="#Hint1" class="headerlink" title="Hint1"></a>Hint1</h3><p>对于每个点， 怎么求出以一条通道结尾的距离最小值？</p>
+<p>这个简单， 只要先跑完一遍<code>Dijkstra()</code>然后用每个点的$d[]$加上一条通道去更新别的点的距离就好了</p>
+<h3 id="Hint2"><a href="#Hint2" class="headerlink" title="Hint2"></a>Hint2</h3><p>如果$k = 1$， 该怎么做？</p>
+<p>如果$1$到点$i$的路径上我们走了一条$u$到$v$的通道， 那么这条路径可以分为三部分：</p>
+<blockquote>
+<ol>
+<li>$1$到$u$的路径， 全是图上的边</li>
+<li>$u$到$v$的通道</li>
+<li>$v$到$i$的路径， 全是图上的边</li>
+</ol>
+</blockquote>
+<p>先用Hint1的的方法， 再把更新后的每个点加入队列再跑一遍<code>Dijkstra()</code>就可以了， 可是这样会不会出现一条路径上用了多个通道呢？ 答案是不会， 因为跑<code>Dijkstra()</code>的过程中用的全是图上的边</p>
+<h3 id="Hint3"><a href="#Hint3" class="headerlink" title="Hint3"></a>Hint3</h3><p>假设已经知道了$k = i$的结果， 怎么求出$k = i + 1$的？</p>
+<p>在Hint2的基础上， 使用$d_{old}[]$（这就是$k = i$时的答案）加上一条通道去更新别的点的距离， 再把更新的点加入队列跑一遍<code>Dijkstra()</code>就可以了</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>以上Hint已经可以导出正解了</p>
+<p>但是显然Hint1中的操作是要$O(n^2)$的， $10^5$的数据肯定是过不了， 要考虑优化</p>
+<p>我们设$d_{old}[]$表示的是在$k = i$时的答案， $d_{new}[]$是在$k = i$的答案的基础上最后加一条通道(也可以不加)更新出的距离</p>
+<p>那么对于每个$v$有</p>
+<script type="math/tex; mode=display">
+d_{new}[v] = min(d_{new}[v](这就是不加), min(d_{old}[u] + (u - v)^2))</script><p>固定$v$， 设$tmp = d_{old}[u] + (u - v)^2$， 改写一下</p>
+<script type="math/tex; mode=display">
+\begin{align}
+tmp
+& = d_{old}[u] + (u - v)^2 \\
+& = d_{old}[u] + u^2 + v^2 - 2uv \\
+& = -2uv + d_{old}[u] + u^2 + v^2
+\end{align}</script><p>所以</p>
+<script type="math/tex; mode=display">
+min(d_{old}[u] + (u - v)^2) = min(-2uv + d_{old}[u] + u^2 + v^2) = min(-2uv + d_{old}[u] + u^2) + v^2</script><p>因为$v$固定， 所以可以把$v^2$单独拿出来， 设$y = -2uv + d_{old}[u] + u^2$， 则对于每个$u$都是一个以$v$为变量的函数</p>
+<script type="math/tex; mode=display">
+y = kx + b \\
+k = -2u \\
+b = d_{old}[u] + u^2</script><p>问题等价于对这$n$个函数求$v = 1, 2, \cdots, n$时的最小值， 这个时候就可以用上面讲的<code>Convex Hull Trick</code>了</p>
+<h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, ks;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from, to, next, cost;</span><br><span class="line">&#125; edge[<span class="number">212345</span>];</span><br><span class="line"><span class="keyword">int</span> head[<span class="number">112345</span>], tot;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> d[<span class="number">112345</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Line</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> k, b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> pos;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> dist;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (Node tmp) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> dist &gt; tmp.dist;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">std:: priority_queue&lt;Node&gt; pq;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Addedge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    edge[++ tot] = (Edge)&#123;u, v, head[u], e&#125;;</span><br><span class="line"></span><br><span class="line">    head[u] = tot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cht</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> ls;</span><br><span class="line">    <span class="keyword">double</span> isct[<span class="number">112345</span>];</span><br><span class="line">    Line line[<span class="number">112345</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ls = <span class="number">0</span>;</span><br><span class="line">        line[<span class="number">0</span>] = (Line)&#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">Insect</span><span class="params">(Line a, Line b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> k1 = <span class="number">1.0</span> * a.k, b1 = <span class="number">1.0</span> * a.b, k2 = <span class="number">1.0</span> * b.k, b2 = <span class="number">1.0</span> * b.b;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (b2 - b1) / (k1 - k2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(Line x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(ls &gt;= <span class="number">2</span> &amp;&amp; <span class="built_in">Insect</span>(line[ls - <span class="number">1</span>], x) &lt;= <span class="built_in">Insect</span>(line[ls - <span class="number">1</span>], line[ls])) ls --;</span><br><span class="line"></span><br><span class="line">        isct[ls] = <span class="built_in">Insect</span>(line[ls], x);</span><br><span class="line">        line[++ ls] = x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> qx)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = std:: <span class="built_in">lower_bound</span>(isct + <span class="number">1</span>, isct + ls, qx) - isct;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1LL</span> * line[p].k * qx + line[p].b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; cht;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(! pq.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u = pq.<span class="built_in">top</span>().pos;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> dis = pq.<span class="built_in">top</span>().dist;</span><br><span class="line">        pq.<span class="built_in">pop</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(d[u] != dis) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = edge[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = edge[i].to;</span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> e = edge[i].cost;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(d[u] + e &lt; d[v])</span><br><span class="line">                d[v] = d[u] + e, pq.<span class="built_in">push</span>((Node)&#123;v, d[v]&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    d[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++) d[i] = <span class="number">1e18</span>;</span><br><span class="line"></span><br><span class="line">    pq.<span class="built_in">push</span>((Node)&#123;<span class="number">1</span>, <span class="number">0</span>&#125;);</span><br><span class="line">    <span class="built_in">Dijkstra</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= ks; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        cht.<span class="built_in">Init</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j ++) cht.<span class="built_in">Insert</span>((Line)&#123;<span class="number">-2LL</span> * j, d[j] + <span class="number">1LL</span> * j * j&#125;);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j ++) d[j] = std:: <span class="built_in">min</span>(d[j], cht.<span class="built_in">Query</span>(j) + <span class="number">1LL</span> * j * j);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j ++) pq.<span class="built_in">push</span>((Node)&#123;j, d[j]&#125;);</span><br><span class="line">        <span class="built_in">Dijkstra</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;m, &amp;ks);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v, e;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;u, &amp;v, &amp;e);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">Addedge</span>(u, v, e);</span><br><span class="line">        <span class="built_in">Addedge</span>(v, u, e);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Solve</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) <span class="built_in">printf</span>(<span class="string">&quot;%lld%c&quot;</span>, d[i], <span class="string">&quot; \n&quot;</span>[i == n]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A1%A5%E9%A2%98/" rel="tag"># 补题</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/cf/" rel="tag"># cf</a>
+              <a href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96/" rel="tag"># 斜率优化</a>
+              <a href="/tags/%E5%87%B8%E5%8C%85%E4%BC%98%E5%8C%96/" rel="tag"># 凸包优化</a>
+              <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag"># 最短路</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/29/%E6%95%B0%E8%AE%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" rel="prev" title="数论学习笔记1">
+      <i class="fa fa-chevron-left"></i> 数论学习笔记1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Convex-Hull-Trick"><span class="nav-number">1.</span> <span class="nav-text">Convex Hull Trick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">原理及实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-Long-Way-Home"><span class="nav-number">2.</span> <span class="nav-text">E. Long Way Home</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="nav-number">2.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">2.3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hint1"><span class="nav-number">2.3.1.</span> <span class="nav-text">Hint1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hint2"><span class="nav-number">2.3.2.</span> <span class="nav-text">Hint2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hint3"><span class="nav-number">2.3.3.</span> <span class="nav-text">Hint3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.3.4.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.4.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zsh"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Zsh</p>
+  <div class="site-description" itemprop="description">一个学子的学习博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021034008号-1 </a>
+      <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwdh6zx8ij300k00k0mz.jpg" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37132402371417" rel="noopener" target="_blank">鲁公安网备37132402371417号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zsh</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
