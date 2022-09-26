@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"alkaid1506.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="期望dp 题目链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Namomo 每日一题div1 675 吃蛋糕 并浅谈期望dp">
+<meta property="og:url" content="http://alkaid1506.github.io/2022/04/20/Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-675-%E5%90%83%E8%9B%8B%E7%B3%95-%E5%B9%B6%E6%B5%85%E8%B0%88%E6%9C%9F%E6%9C%9Bdp/index.html">
+<meta property="og:site_name" content="Alkaid&#39;s Blog">
+<meta property="og:description" content="期望dp 题目链接">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-20T14:04:23.000Z">
+<meta property="article:modified_time" content="2022-04-26T11:32:47.233Z">
+<meta property="article:author" content="Zsh">
+<meta property="article:tag" content="dp">
+<meta property="article:tag" content="题解">
+<meta property="article:tag" content="期望dp">
+<meta property="article:tag" content="每日一题">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://alkaid1506.github.io/2022/04/20/Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-675-%E5%90%83%E8%9B%8B%E7%B3%95-%E5%B9%B6%E6%B5%85%E8%B0%88%E6%9C%9F%E6%9C%9Bdp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Namomo 每日一题div1 675 吃蛋糕 并浅谈期望dp | Alkaid's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Alkaid's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录学习路上的点滴</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://alkaid1506.github.io/2022/04/20/Namomo-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98div1-675-%E5%90%83%E8%9B%8B%E7%B3%95-%E5%B9%B6%E6%B5%85%E8%B0%88%E6%9C%9F%E6%9C%9Bdp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="Zsh">
+      <meta itemprop="description" content="一个学子的学习博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alkaid's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Namomo 每日一题div1 675 吃蛋糕 并浅谈期望dp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-20 22:04:23" itemprop="dateCreated datePublished" datetime="2022-04-20T22:04:23+08:00">2022-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 19:32:47" itemprop="dateModified" datetime="2022-04-26T19:32:47+08:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Acm/" itemprop="url" rel="index"><span itemprop="name">Acm</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>期望dp</p>
+<p><a target="_blank" rel="noopener" href="http://oj.daimayuan.top/problem/675">题目链接</a></p>
+<span id="more"></span>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有$n$个盘子分别为$1, 2, …, n$， 每个盘子里初始装了$a_i(1 \leq a_i \leq 3)$块蛋糕， 每次按照下面的方法吃蛋糕， 直到蛋糕吃完</p>
+<blockquote>
+<p>每次等概率的从$n$个盘子中挑选一个， 假设选择了第$i$个盘子， 如果该盘子中有蛋糕， 那么就吃掉一个； 如果没有， 那就什么也不做</p>
+</blockquote>
+<p>求出吃掉所有蛋糕的期望次数</p>
+<h2 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h2><p>$1 \leq n \leq 300$</p>
+<p>$1 \leq a_i \leq 3$</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>只有$4$种盘子， 盘子里有$1, 2, 3$块蛋糕的盘子和空盘子， 由于一共只有$n$个盘子， 所以我们知道其中$3$种盘子的数量， 就可以推出另一种盘子的数量</p>
+<p>又盘子数最多为$300$， 那我们以每种盘子的数量为状态来设计$dp$方程</p>
+<p>设$dp[a][b][c]$为有$1$块蛋糕的盘子数量为$a$， 有$2$块蛋糕的盘子数量为$b$， 有三块蛋糕的盘子数量为$c$， 从当前状态出发要把蛋糕全吃完的期望次数</p>
+<p>既然我们的实际结束状态为$dp[0][0][0]$， 我们应该在$dp$中把它设为初始状态(因为它不会转移到自己， 肯定是0)</p>
+<p>那我们的转移应该是</p>
+<script type="math/tex; mode=display">
+\begin{align}
+dp[a][b][c]
+& = (dp[a - 1][b][c] + 1) \times \frac{a}{n} \\
+& + (dp[a + 1][b - 1][c] + 1) \times \frac{b}{n} \\
+& + (dp[a][b + 1][c - 1] + 1) \times \frac{c}{n} \\
+& + (dp[a][b][c] + 1) \times \frac{n - a - b - c}{n} \\
+\end{align}</script><p>然后我们就发现这个东西是不可以直接枚举的， 不管你正序还是倒序枚举， 都会出现后效性 ，因为$a$同时依赖于$a - 1, a + 1$， $b$同理， 那我们改写一下这个式子</p>
+<script type="math/tex; mode=display">
+\begin{align}
+(dp[a + 1][b - 1][c] + 1) \times \frac{b}{n}
+& = (dp[a - 1][b][c] + 1) \times \frac{a}{n} \\
+& + (dp[a][b + 1][c - 1] + 1) \times \frac{c}{n} \\
+& + (dp[a][b][c] + 1) \times \frac{n - a - b - c}{n} \\
+& - dp[a][b][c]
+\end{align}</script><p>根据和式的交换律， 我们用$a - 1$替换$a$， $b + 1$替换$b$， <strong>注意， 这样还原之后默认$a$大于等于$1$</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}
+dp[a][b][c] \times \frac{b + 1}{n}
+& = (dp[a - 2][b + 1][c] + 1) \times \frac{a - 1}{n} \\
+& + (dp[a - 1][b + 2][c] + 1) \times \frac{c}{n} \\
+& + (dp[a - 1][b + 1][c] + 1) \times \frac{n - (a - 1) - (b + 1) - c}{n} \\
+& - dp[a - 1][b + 1][c] \\
+\end{align}</script><p>由于我们默认$a$大于等于1， 所以我们需要额外处理$a = 0$的情况， 然后你就会发现还是有后效性</p>
+<p>虽然学长说有些$dp$就是有后效性， 这个时候可以列方程用高斯消元解决， 但是我不会啊</p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>既然这样设计$dp$存在后效性， 那我们就改一下$dp$方程的含义， 注意到我们每次有效操作， 一定会有一种盘子数量减少$1$， 相邻种类的盘子数量增加$1$， 也就是说他们的数量和是不变的</p>
+<p>那我们设计新状态$dp[a][b][c$]表示有$3$块蛋糕的盘子数量为$c$， 有$2$块和$3$块的盘子的数量和为$b$， 有$1, 2, 3$块盘子的数量和为$a$到$dp[0][0][0$]的期望次数</p>
+<p>那么转移方程为</p>
+<script type="math/tex; mode=display">
+\begin{align}
+dp[a][b][c]
+& = (dp[a - 1][b][c] + 1) \times \frac{a - b}{n} \\
+& + (dp[a][b - 1][c] + 1) \times \frac{b - c}{n} \\
+& + (dp[a][b][c - 1] + 1) \times \frac{c}{n} \\
+& + (dp[a][b][c] + 1) \times \frac{n - a}{n} \\
+\end{align}</script><p>$a$从$1$到$n$枚举， $b, c$都是$0$到$n$， 过程中保证不越界并且$c \leq b \leq a$</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">double</span> f[<span class="number">302</span>][<span class="number">302</span>][<span class="number">302</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">double</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">0</span> || j &lt; <span class="number">0</span> || k &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> f[i][j][k] + <span class="number">1.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;tmp);</span><br><span class="line"></span><br><span class="line">        p[tmp] ++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j ++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= j; k ++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">double</span> tmp1 = <span class="built_in">F</span>(i - <span class="number">1</span>, j, k) * (<span class="number">1.0</span> * i - j) / n;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">double</span> tmp2 = <span class="built_in">F</span>(i, j - <span class="number">1</span>, k) * (<span class="number">1.0</span> * j - k) / n;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">double</span> tmp3 = <span class="built_in">F</span>(i, j, k - <span class="number">1</span>) * <span class="number">1.0</span> * k / n;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">double</span> tmp4 = <span class="number">1.0</span> - <span class="number">1.0</span> * i / n;</span><br><span class="line">                <span class="keyword">long</span> <span class="keyword">double</span> tmp5 = <span class="number">1.0</span> * n / i;</span><br><span class="line"></span><br><span class="line">                f[i][j][k] = (tmp1 + tmp2 + tmp3 + tmp4) * tmp5;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> ans = f[n][p[<span class="number">2</span>] + p[<span class="number">3</span>]][p[<span class="number">3</span>]];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%.12lf\n&quot;</span>, ans);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="浅谈期望-dp"><a href="#浅谈期望-dp" class="headerlink" title="浅谈期望$dp$"></a>浅谈期望$dp$</h1><h2 id="详解本题"><a href="#详解本题" class="headerlink" title="详解本题"></a>详解本题</h2><h3 id="状态设计"><a href="#状态设计" class="headerlink" title="状态设计"></a>状态设计</h3><p>以本题为例， 我们最终的目标是把所有的蛋糕都吃掉， 也就是说让所有的盘子都变成空盘子， 我们的实际操作中， 初始状态是$f[n][p[2] + p[3]][p[3]]$， 目标状态是$f[0][0][0]$， 那么我们的$dp$状态应该表示什么呢， 应该有两种表示方法</p>
+<ol>
+<li>$f[i][j][k]$表示从$f[n][p[2] + p[3]][p[3]]$到$f[i][j][k]$所期望的步数</li>
+<li>$f[i][j][k]$表示$f[i][j][k]$到$f[0][0][0]$的期望步数</li>
+</ol>
+<h4 id="第一种设法"><a href="#第一种设法" class="headerlink" title="第一种设法"></a>第一种设法</h4><p>这样的话我们$dp$的初始状态为$f[n][p[2] + p[3]][p[3]]$， 然后往别的状态转移， 直到$f[0][0][0]$</p>
+<p>但是这样会出现问题， 那就是$f[n][p[2] + p[3]][p[3]]$并不为$0$， 因为它虽然是初始状态， 但是它可以转移到自己， 那它的期望就肯定不是$0$， 不好算</p>
+<p>而且$f[0][0][0]$是转移不到自己的， 还得特判</p>
+<h4 id="第二种设法"><a href="#第二种设法" class="headerlink" title="第二种设法"></a>第二种设法</h4><p>这种设法， 我们$dp$的初始状态为$f[0][0][0]$， 然后往别的状态转移， 直到$f[n][p[2] + p[3]][p[3]]$</p>
+<p>这种设法的话$f[0][0][0] = 0$， 肯定是没有问题的， 因为实际操作中一旦到达这个状态就结束了， 它不会自己转移到自己， 那我们就可以直接$dp$了</p>
+<h3 id="状态转移"><a href="#状态转移" class="headerlink" title="状态转移"></a>状态转移</h3><p>根据概率的概念， 一次事件是一次试验可能结果的子集， 那么一个事件$s$的概率是</p>
+<script type="math/tex; mode=display">p(s) = \frac{|s|}{|S|}</script><p>也就是说我们对当前状态进行一次操作会产生有限种结果， 每种结果有一种概率(这些结果概率和必为$1$)， 然后再根据</p>
+<script type="math/tex; mode=display">E(X) = \sum_{s \in S} p(s) \times E(s)</script><p>求出期望就可以了， 这里其实也告诉我们： <strong>我们设计$dp$状态时要把实际操作中的结束状态设为$dp$的初始状态</strong>， 因为在$dp$中， 我们当前状态需要由实际操作中从这种状态操作一次会产生的所有子状态转移， 也就是说， 我们要算当前状态的$dp$值， 我们需要的是实际操作后的状态的$dp$值， 所有我们$dp$的过程和实际操作的过程是相反的</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/dp/" rel="tag"># dp</a>
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E6%9C%9F%E6%9C%9Bdp/" rel="tag"># 期望dp</a>
+              <a href="/tags/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="tag"># 每日一题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/16/Kmp/" rel="prev" title="Kmp">
+      <i class="fa fa-chevron-left"></i> Kmp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/25/Acwing-3115-%E7%96%AF%E7%8B%82%E7%9A%84%E9%A6%92%E5%A4%B4-%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%BB%B4%E6%8A%A4%E5%8C%BA%E9%97%B4%E8%A6%86%E7%9B%96/" rel="next" title="Acwing 3115. 疯狂的馒头 并查集维护区间覆盖">
+      Acwing 3115. 疯狂的馒头 并查集维护区间覆盖 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4"><span class="nav-number">1.2.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.3.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88%E6%9C%9F%E6%9C%9B-dp"><span class="nav-number">2.</span> <span class="nav-text">浅谈期望$dp$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E8%A7%A3%E6%9C%AC%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">详解本题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.1.</span> <span class="nav-text">状态设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E8%AE%BE%E6%B3%95"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">第一种设法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E8%AE%BE%E6%B3%95"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">第二种设法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB"><span class="nav-number">2.1.2.</span> <span class="nav-text">状态转移</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zsh"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">Zsh</p>
+  <div class="site-description" itemprop="description">一个学子的学习博客</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鲁ICP备2021034008号-1 </a>
+      <img src="https://tva1.sinaimg.cn/large/008i3skNgy1gwwdh6zx8ij300k00k0mz.jpg" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37132402371417" rel="noopener" target="_blank">鲁公安网备37132402371417号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zsh</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
